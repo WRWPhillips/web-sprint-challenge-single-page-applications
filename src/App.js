@@ -1,11 +1,18 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
+import { Link, Route, Switch } from 'react-router-dom';
+
 
 const App = () => {
   return (
-    <>
+    <div className="container">
+      <Route exact path='/'>
       <h1>Lambda Eats</h1>
-      <p>You can remove this code and create your own header</p>
-    </>
+      {/* main body of code including current order here */}
+      </Route>
+      <Route path='/pizza'>
+        
+      </Route>
+    </div>
   );
 };
 export default App;
