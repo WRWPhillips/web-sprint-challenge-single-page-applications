@@ -11,6 +11,13 @@ export default function PizzaForm(props) {
         errors,
     } = props;
 
+    const focusStateOff = '';
+    const focusStateOn = `"autoFocus"`;
+    let focustoggle1 = focusStateOff;
+    let focustoggle2 = focusStateOff;
+
+    const [ focusState, setFocusState ] = useState('')
+
     const onSubmit = evt => {
         evt.preventDefault();
         submit();
@@ -21,6 +28,13 @@ export default function PizzaForm(props) {
         const valueToUse = type === 'checkbox' ? checked : value;
         change(name, valueToUse);
     }
+
+    const setFocus = () => {
+        !focusState ? setFocusState(focusStateOn) : setFocusState(focusStateOff);
+        console.log(focustoggle1, focustoggle2);
+    }
+
+    
 
     const PizzaForm = Styled.form`
         display: flex;
@@ -66,12 +80,15 @@ export default function PizzaForm(props) {
             </div>
             <div className='form-group inputs'>
                 <h3>Required Inputs</h3>
+                    <p>{errors['name-input']}</p>
                     <label>Your Name:{"  "}
                         <TextInput
                         key={uuidv4()}
+                         autoFocus={focusState}
                         id='name-input'
                         value={values['name-input']}
-                        onChange={onChange}
+                        onChange={onChange }
+                        onClick={setFocus}
                         name='name-input'
                         type='text'
                         />
@@ -81,8 +98,10 @@ export default function PizzaForm(props) {
                         <TextInput
                         key={uuidv4()}
                         id='special-text' 
+                        autoFocus={!focusState}
                         value={values['special-text']}
                         onChange={onChange}
+                        onClick={setFocus}
                         name='special-text'
                         type='text'
                         />

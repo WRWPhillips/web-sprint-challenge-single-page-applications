@@ -4,8 +4,8 @@ const pizzaSchema = yup.object().shape({
     'name-input': yup
         .string()
         .trim()
-        .required('You must enter your name!'),
-
+        .required('You must enter your name!')
+        .min(2, "name must be at least 2 characters"),
     'size-dropdown': yup
         .string()
         .oneOf(['small', 'medium', 'large'], 'You must select a size!'),
@@ -19,4 +19,3 @@ const pizzaSchema = yup.object().shape({
 })
 
 export default pizzaSchema;
-        // .min(2, "name must be at least 2 characters"),,
