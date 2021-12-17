@@ -58,6 +58,9 @@ const App = () => {
   const [orders, setOrders] = useState(initialOrders)
   const [disabled, setDisabled] = useState(initialDisable)
   const [formErrors, setFormErrors] = useState(initialErrors)
+  const [focusState, setFocusState] = useState('')
+  const focusStateOff = '';
+  const focusStateOn = `"autoFocus"`;
 
   const postOrder = newOrder => {
     axios.post('https://reqres.in/api/orders', newOrder)
@@ -75,6 +78,11 @@ const App = () => {
       .then(() => setFormErrors({ ...formErrors, [name]: '' }))
       .catch(err => setFormErrors({ ...formErrors, [name]: err.errors[0] }))
   }
+
+  const setFocus = () => {
+    !focusState ? setFocusState(focusStateOn) : setFocusState(focusStateOff);
+}
+
 
   const inputChange = (name, value) => {
     validate(name, value);
@@ -135,6 +143,8 @@ const App = () => {
           submit={formSubmit}
           values={formValues}
           errors={formErrors}
+          focus={setFocus}
+          focusState={focusState}
          />}
       </Route>
 
